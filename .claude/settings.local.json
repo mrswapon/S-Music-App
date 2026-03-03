@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:/Users/swapo/StudioProjects/s_music\" && flutter analyze lib/features/music_player/data/repositories/audio_stream_server.dart 2>&1)",
+      "Bash(cd \"C:/Users/swapo/StudioProjects/s_music\" && flutter analyze lib/ 2>&1)",
+      "Bash(tail:*)",
+      "Bash(cd \"C:/Users/swapo/StudioProjects/s_music\" && flutter build apk --debug 2>&1)",
+      "Bash(cd \"C:/Users/swapo/StudioProjects/s_music\" && flutter clean 2>&1)",
+      "Bash(cd \"C:/Users/swapo/StudioProjects/s_music\" && flutter pub get 2>&1 && flutter build apk --debug 2>&1)",
+      "Bash(powershell:*)",
+      "Bash(cmd:*)",
+      "Bash(cd:*)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter analyze lib/features/music_player/data/repositories/audio_stream_server.dart lib/features/music_player/data/repositories/youtube_repository.dart 2>&1)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter analyze lib/features/music_player/ 2>&1)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter pub upgrade youtube_explode_dart 2>&1)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter build apk --debug 2>&1)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter pub get && flutter build apk --debug 2>&1)"
+    ]
+  }
+}
