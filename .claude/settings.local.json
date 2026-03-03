@@ -14,7 +14,25 @@
       "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter analyze lib/features/music_player/ 2>&1)",
       "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter pub upgrade youtube_explode_dart 2>&1)",
       "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter build apk --debug 2>&1)",
-      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter pub get && flutter build apk --debug 2>&1)"
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter pub get && flutter build apk --debug 2>&1)",
+      "WebSearch",
+      "WebFetch(domain:pub.dev)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter analyze lib/features/music_player/data/repositories/audio_stream_server.dart lib/features/music_player/data/repositories/youtube_repository.dart lib/features/music_player/presentation/bloc/music_player_bloc.dart 2>&1)",
+      "Bash(adb shell:*)",
+      "Bash(\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" shell:*)",
+      "Bash(head:*)",
+      "Bash(ADB=\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" && \"$ADB\" shell pm list packages -3 2>&1)",
+      "Bash(ADB=\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" && \"$ADB\" shell 'pm trim-caches 500M' 2>&1 && \"$ADB\" shell 'rm -rf /data/local/tmp/*' 2>&1 && \"$ADB\" shell 'df -h /data' 2>&1)",
+      "Bash(ADB=\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" && \"$ADB\" install -r -d \"C:/Users/swapo/StudioProjects/s_music/build/app/outputs/flutter-apk/app-debug.apk\" 2>&1)",
+      "Bash(ADB=\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" && \"$ADB\" shell am start -n com.example.s_music/.MainActivity 2>&1)",
+      "Bash(ADB=\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" && \"$ADB\" shell 'dumpsys package com.example.s_music | grep -A1 \"Activity \"' 2>&1)",
+      "Bash(ADB=\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" && \"$ADB\" shell monkey -p com.example.s_music -c android.intent.category.LAUNCHER 1 2>&1)",
+      "Bash(ADB=\"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe\" && \"$ADB\" shell monkey -p com.mr_swapon.s_music -c android.intent.category.LAUNCHER 1 2>&1)",
+      "Bash(grep:*)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter pub get 2>&1)",
+      "Bash(cd /c/Users/swapo/StudioProjects/s_music && flutter analyze 2>&1)",
+      "Bash(grep youtube:*)",
+      "Bash(ls:*)"
     ]
   }
 }

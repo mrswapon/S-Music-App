@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/utils/format_utils.dart';
@@ -76,51 +77,12 @@ class NowPlayingScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: screenHeight * 0.02),
-                    // Album art with pulse when playing
+                    // Video player or album art
                     Expanded(
                       flex: 5,
                       child: Center(
-                        child: PulseWidget(
-                          animate: isPlaying,
-                          minScale: 0.97,
-                          maxScale: 1.03,
-                          duration: const Duration(milliseconds: 2000),
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 500),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppTheme.primaryColor.withValues(
-                                        alpha: isPlaying ? 0.5 : 0.25),
-                                    blurRadius: isPlaying ? 40 : 20,
-                                    offset: const Offset(0, 10),
-                                  ),
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(24),
-                                child: song.thumbnailUrl != null
-                                    ? Hero(
-                                        tag: 'thumb_${song.id}',
-                                        child: Image.network(
-                                          song.thumbnailUrl!,
-                                          fit: BoxFit.cover,
-                                          loadingBuilder: (_, child, progress) =>
-                                              progress == null
-                                                  ? child
-                                                  : _defaultArt(isTablet),
-                                          errorBuilder: (_, __, ___) =>
-                                              _defaultArt(isTablet),
-                                        ),
-                                      )
-                                    : _defaultArt(isTablet),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: _buildMediaArea(context, state, song,
+                            isPlaying, isTablet),
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.03),
@@ -301,6 +263,82 @@ class NowPlayingScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildMediaArea(BuildContext context, MusicPlayerState state,
+      dynamic song, bool isPlaying, bool isTablet) {
+    final controller =
+        context.read<MusicPlayerBloc>().videoController;
+
+    if (state.isVideoMode &&
+        controller != null &&
+        controller.value.isInitialized) {
+      // Video mode — show actual video
+      return AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: AppTheme.primaryColor
+                  .withValues(alpha: isPlaying ? 0.5 : 0.25),
+              blurRadius: isPlaying ? 40 : 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: VideoPlayer(controller),
+          ),
+        ),
+      );
+    }
+
+    // Audio mode — show album art with pulse animation
+    return PulseWidget(
+      animate: isPlaying,
+      minScale: 0.97,
+      maxScale: 1.03,
+      duration: const Duration(milliseconds: 2000),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: AppTheme.primaryColor
+                    .withValues(alpha: isPlaying ? 0.5 : 0.25),
+                blurRadius: isPlaying ? 40 : 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: song.thumbnailUrl != null
+                ? Hero(
+                    tag: 'now_playing_thumb_${song.id}',
+                    child: Image.network(
+                      song.thumbnailUrl!,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (_, child, progress) =>
+                          progress == null
+                              ? child
+                              : _defaultArt(isTablet),
+                      errorBuilder: (_, __, ___) =>
+                          _defaultArt(isTablet),
+                    ),
+                  )
+                : _defaultArt(isTablet),
+          ),
+        ),
+      ),
     );
   }
 

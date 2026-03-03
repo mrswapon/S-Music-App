@@ -16,6 +16,7 @@ class MusicPlayerState extends Equatable {
   final String? errorMessage;
   final bool isShuffleOn;
   final RepeatMode repeatMode;
+  final bool isVideoMode;
 
   const MusicPlayerState({
     this.songs = const [],
@@ -27,6 +28,7 @@ class MusicPlayerState extends Equatable {
     this.errorMessage,
     this.isShuffleOn = false,
     this.repeatMode = RepeatMode.off,
+    this.isVideoMode = false,
   });
 
   MusicPlayerState copyWith({
@@ -39,6 +41,7 @@ class MusicPlayerState extends Equatable {
     String? errorMessage,
     bool? isShuffleOn,
     RepeatMode? repeatMode,
+    bool? isVideoMode,
   }) {
     return MusicPlayerState(
       songs: songs ?? this.songs,
@@ -50,6 +53,7 @@ class MusicPlayerState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       isShuffleOn: isShuffleOn ?? this.isShuffleOn,
       repeatMode: repeatMode ?? this.repeatMode,
+      isVideoMode: isVideoMode ?? this.isVideoMode,
     );
   }
 
@@ -64,5 +68,6 @@ class MusicPlayerState extends Equatable {
         errorMessage,
         isShuffleOn,
         repeatMode,
+        isVideoMode,
       ];
 }
